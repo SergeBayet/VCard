@@ -2,11 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Serge Bayet : Mon CV</title>
+    <title>Serge Bayet : VCard</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300&display=swap" rel="stylesheet"> 
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+		
 	</head>
+	
   <body>
 		<div class="wrapper">
 			<section class="name">
@@ -25,30 +31,49 @@
 				</ul>
 			</section>
 			
-			<section class="about band">
+			<section class="about band" data-hidden="false">
 				<h2 class="title-band">About</h2>
 				<p class="title-description">About me</p>
 			</section>
-			<section class="portfolio band">
+			<section class="portfolio band" data-hidden="false">
 				<h2 class="title-band">Portfolio</h2>
 				<p class="title-description">My works</p>
 			</section>
-			<section class="resume band">
+			<section class="resume band" data-hidden="false">
 				<h2 class="title-band">Resume</h2>
 				<p class="title-description">Personal profile</p>
 			</section>
-			<section class="contact band">
+			<section class="contact band" data-hidden="false">
 				<h2 class="title-band">Contact</h2>
 				<p class="title-description">Get in touch</p>
 			</section>
 			
-			
-			
-			
+			<section class="about-info" data-hidden="true">
+				
+					<h2>About</h2>
+					<p>I'm not the same as before</p>
+					<img width="300px" src="images/profile.jpg">
+				
+			</section>
+			<section class="contact-info" data-hidden="true">
+				
+				<h2>Contact</h2>
+				<p>Et quoniam apud eos ut in capite mundi morborum acerbitates celsius dominantur, ad quos vel sedandos omnis professio medendi torpescit, excogitatum est adminiculum sospitale nequi amicum perferentem similia videat, additumque est cautionibus paucis remedium aliud satis validum, ut famulos percontatum missos quem ad modum valeant noti hac aegritudine colligati, non ante recipiant domum quam lavacro purgaverint corpus. ita etiam alienis oculis visa metuitur labes.</p>
+			</section>
+			<section class="portfolio-info" data-hidden="true">
+				
+				<h2>Portfolio</h2>
+				<p>Et quoniam apud eos ut in capite mundi morborum acerbitates celsius dominantur, ad quos vel sedandos omnis professio medendi torpescit, excogitatum est adminiculum sospitale nequi amicum perferentem similia videat, additumque est cautionibus paucis remedium aliud satis validum, ut famulos percontatum missos quem ad modum valeant noti hac aegritudine colligati, non ante recipiant domum quam lavacro purgaverint corpus. ita etiam alienis oculis visa metuitur labes.</p>
+			</section>
+			<section class="resume-info" data-hidden="true">
+				
+				<h2>Resume</h2>
+				<p>Et quoniam apud eos ut in capite mundi morborum acerbitates celsius dominantur, ad quos vel sedandos omnis professio medendi torpescit, excogitatum est adminiculum sospitale nequi amicum perferentem similia videat, additumque est cautionibus paucis remedium aliud satis validum, ut famulos percontatum missos quem ad modum valeant noti hac aegritudine colligati, non ante recipiant domum quam lavacro purgaverint corpus. ita etiam alienis oculis visa metuitur labes.</p>
+			</section>
 		</div>
 		<section class="footer-wrapper">
 			<section class="twitter">
-				<p><a href="#"><i class="fa fa-twitter"></i></a></p>
+				
 			</section>
 			
 			<section class="pager">
@@ -57,9 +82,63 @@
 			</section>
 			
 			<section class="network">
-				
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-linkedin"></i></a>
+				<a href="#"><i class="fa fa-github"></i></a>
 			</section>
 		
 		</section>
 	</body>
+	<script>
+	$(document).ready(function(){
+
+		$('.about').on('click',function() {
+			$('.about-info, .portfolio, .resume, .contact').attr('data-hidden', function(index, attr){
+					return attr == "true" ? "false" : "true";
+			});
+		});
+		$('.contact').on('click',function() {
+			$('.contact-info, .portfolio, .resume, .about').attr('data-hidden', function(index, attr){
+					return attr == "true" ? "false" : "true";
+			});
+		});
+		$('.portfolio').on('click',function() {
+			var width_about = $('.about').width() + 60;
+			if($('.about').attr('data-hidden') == "true")
+			{
+				width_about = -width_about;
+			}
+			
+			$( ".portfolio" ).animate({
+				marginLeft: "-="+width_about,
+				marginRight: "+="+width_about
+			}, 1000, function() {
+				// Animation complete.
+			});
+			$('.portfolio-info, .about, .resume, .contact').attr('data-hidden', function(index, attr){
+					return attr == "true" ? "false" : "true";
+			});
+			
+		});
+		$('.resume').on('click',function() {
+			var width_contact = $('.about').width() + 60;
+			if($('.contact').attr('data-hidden') == "true")
+			{
+				width_contact = -width_contact;
+			}
+			
+			$( ".resume" ).animate({
+				marginLeft: "+="+width_contact,
+				marginRight: "-="+width_contact
+			}, 1000, function() {
+				// Animation complete.
+			});
+			$('.resume-info, .about, .portfolio, .contact').attr('data-hidden', function(index, attr){
+					return attr == "true" ? "false" : "true";
+			});
+			
+		});
+	}); 
+	</script>
 </html>
